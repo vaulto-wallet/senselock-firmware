@@ -1,0 +1,8 @@
+.clang
+.codelite
+Debug
+Release
+bitlock.txt
+bitlock.mk
+compile_flags.txt
+libh4ses.a

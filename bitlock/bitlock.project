@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeLite_Project Name="bitlock" InternalType="Console" Version="10.0.0">
+  <Plugins>
+    <Plugin Name="qmake">
+      <![CDATA[00020001N0005Debug0000000000000001N0007Release000000000000]]>
+    </Plugin>
+    <Plugin Name="CMakePlugin">
+      <![CDATA[[{
+  "name": "Debug",
+  "enabled": false,
+  "buildDirectory": "build",
+  "sourceDirectory": "$(ProjectPath)",
+  "generator": "",
+  "buildType": "",
+  "arguments": [],
+  "parentProject": ""
+ }, {
+  "name": "Release",
+  "enabled": false,
+  "buildDirectory": "build",
+  "sourceDirectory": "$(ProjectPath)",
+  "generator": "",
+  "buildType": "",
+  "arguments": [],
+  "parentProject": ""
+ }]]]>
+    </Plugin>
+  </Plugins>
+  <Description/>
+  <Dependencies/>
+  <VirtualDirectory Name="src">
+    <File Name="main.c"/>
+    <File Name="startup_SSH5.S"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="inc">
+    <File Name="inc/h5ses_aes.h"/>
+    <File Name="inc/h5ses_common.h"/>
+    <File Name="inc/h5ses_des.h"/>
+    <File Name="inc/h5ses_device.h"/>
+    <File Name="inc/h5ses_ecc.h"/>
+    <File Name="inc/h5ses_file.h"/>
+    <File Name="inc/h5ses_hash.h"/>
+    <File Name="inc/h5ses_io.h"/>
+    <File Name="inc/h5ses_rand.h"/>
+    <File Name="inc/h5ses_rsa.h"/>
+    <File Name="inc/h5ses_sm.h"/>
+    <File Name="h5ses.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="secp256k1">
+    <File Name="secp256k1/include/secp256k1.c"/>
+    <File Name="secp256k1/include/secp256k1.h"/>
+    <File Name="secp256k1/sb_sw_lib.c"/>
+    <File Name="secp256k1/sb_fe.c"/>
+    <File Name="secp256k1/sb_hmac_drbg.c"/>
+    <File Name="secp256k1/sb_hmac_sha256.c"/>
+    <File Name="secp256k1/sb_sha256.c"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="sha512">
+    <File Name="sign/hmac.c"/>
+    <File Name="sign/sha512.c"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="encoding">
+    <File Name="encoding/base58.c"/>
+    <File Name="encoding/libbase58.h"/>
+  </VirtualDirectory>
+  <VirtualDirectory Name="btclib">
+    <File Name="libbtc/ecc_libsecp256k1.c"/>
+    <File Name="libbtc/bip32.c"/>
+    <File Name="libbtc/ripemd160.c"/>
+    <File Name="libbtc/sha2.c"/>
+    <File Name="libbtc/base58.c"/>
+    <File Name="libbtc/segwit_addr.c"/>
+    <File Name="libbtc/utils.c"/>
+  </VirtualDirectory>
+  <Settings Type="Executable">
+    <GlobalSettings>
+      <Compiler Options="" C_Options="" Assembler="">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="">
+        <LibraryPath Value="."/>
+      </Linker>
+      <ResourceCompiler Options=""/>
+    </GlobalSettings>
+    <Configuration Name="Debug" CompilerType="Cross GCC ( arm-none-eabi )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-g;-O0;-Wall;-mcpu=cortex-m0;-mthumb;-mthumb-interwork;-fno-exceptions;-ffunction-sections;-fdata-sections;-fPIC;-msingle-pic-base" C_Options="-g;-O0;-Wall;-mcpu=cortex-m0;-mthumb;-mthumb-interwork;-fno-exceptions;-ffunction-sections;-fdata-sections;-fPIC;-msingle-pic-base;-lgcc_s" Assembler="-g; -mcpu=cortex-m0;-mthumb;-mthumb-interwork;" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+      </Compiler>
+      <Linker Options="-mcpu=cortex-m0;-mthumb;-fno-exceptions;-ffunction-sections;-fdata-sections;-fPIC;-msingle-pic-base;-specs=h5_nano.specs;-nostartfiles;-Tssh5.ld;-L./;-lh5ses" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Debug" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="yes" RemoteHostName="localhost" RemoteHostPort="3333" DebuggerPath="..\..\..\..\..\..\..\EL5\gcc\gcc-arm-none-eabi-5.3\bin\arm-none-eabi-gdb.exe" IsExtended="yes">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands>load
+</PostConnectCommands>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild>
+        <Command Enabled="yes">elf2evx --stack 512 -o $(ProjectName).evx   $(IntermediateDirectory)/$(ProjectName)</Command>
+      </PostBuild>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+    <Configuration Name="Release" CompilerType="Cross GCC ( arm-none-eabi )" DebuggerType="GNU gdb debugger" Type="Executable" BuildCmpWithGlobalSettings="append" BuildLnkWithGlobalSettings="append" BuildResWithGlobalSettings="append">
+      <Compiler Options="-O2;-Wall;-mcpu=cortex-m0;-mthumb;-mthumb-interwork;-fno-exceptions;-ffunction-sections;-fdata-sections; -fPIC; -msingle-pic-base" C_Options="-O2;-Wall;-mcpu=cortex-m0;-mthumb;-mthumb-interwork;-fno-exceptions;-ffunction-sections;-fdata-sections; -fPIC; -msingle-pic-base" Assembler="-mcpu=cortex-m0;-mthumb;-mthumb-interwork;" Required="yes" PreCompiledHeader="" PCHInCommandLine="no" PCHFlags="" PCHFlagsPolicy="0">
+        <IncludePath Value="."/>
+        <Preprocessor Value="NDEBUG"/>
+      </Compiler>
+      <Linker Options="-mcpu=cortex-m0;-mthumb;-fno-exceptions;-ffunction-sections;-fdata-sections; -fPIC; -msingle-pic-base; -specs=h5_nano.specs; -nostartfiles; -Tssh5.ld; -L./; -lh5ses" Required="yes"/>
+      <ResourceCompiler Options="" Required="no"/>
+      <General OutputFile="$(IntermediateDirectory)/$(ProjectName)" IntermediateDirectory="./Release" Command="./$(ProjectName)" CommandArguments="" UseSeparateDebugArgs="no" DebugArguments="" WorkingDirectory="$(IntermediateDirectory)" PauseExecWhenProcTerminates="yes" IsGUIProgram="no" IsEnabled="yes"/>
+      <Environment EnvVarSetName="&lt;Use Defaults&gt;" DbgSetName="&lt;Use Defaults&gt;">
+        <![CDATA[]]>
+      </Environment>
+      <Debugger IsRemote="no" RemoteHostName="" RemoteHostPort="" DebuggerPath="" IsExtended="no">
+        <DebuggerSearchPaths/>
+        <PostConnectCommands/>
+        <StartupCommands/>
+      </Debugger>
+      <PreBuild/>
+      <PostBuild>
+        <Command Enabled="yes">elf2evx --stack 512 -o $(ProjectName).evx   $(IntermediateDirectory)/$(ProjectName)</Command>
+      </PostBuild>
+      <CustomBuild Enabled="no">
+        <RebuildCommand/>
+        <CleanCommand/>
+        <BuildCommand/>
+        <PreprocessFileCommand/>
+        <SingleFileCommand/>
+        <MakefileGenerationCommand/>
+        <ThirdPartyToolName>None</ThirdPartyToolName>
+        <WorkingDirectory/>
+      </CustomBuild>
+      <AdditionalRules>
+        <CustomPostBuild/>
+        <CustomPreBuild/>
+      </AdditionalRules>
+      <Completion EnableCpp11="no" EnableCpp14="no">
+        <ClangCmpFlagsC/>
+        <ClangCmpFlags/>
+        <ClangPP/>
+        <SearchPaths/>
+      </Completion>
+    </Configuration>
+  </Settings>
+  <VirtualDirectory Name="tests">
+    <File Name="tests/test_hash.c"/>
+    <File Name="tests/test_ecc.c"/>
+    <File Name="tests/test_base58.c"/>
+    <File Name="tests/test_bip44.c"/>
+    <File Name="tests/test_fe.c"/>
+  </VirtualDirectory>
+</CodeLite_Project>
